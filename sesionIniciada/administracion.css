@@ -1,0 +1,663 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: 'Nunito', sans-serif;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+video{
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    position: absolute;
+}
+img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+ul{
+    list-style: none;
+    padding-left: 0;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+/* Banner */
+.background--banner{
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+.banner{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    position: absolute;
+}
+/* Menu */
+.menu{
+    width: 95%;
+    margin-inline:auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    font-size: 15px;
+}
+.navegacion{
+    padding-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 15px;
+}
+@media (min-width:400px) {
+    .navegacion{
+        gap: 15px;
+    }
+}
+/* Menu izquierda */
+.logo{
+    width: 40px;
+    height: 40px;
+    margin-top: 21px;
+}
+@media (min-width:768px) {
+    .logo{
+        width: 250px;
+        height: 60px;
+    }
+}
+@media (min-width:992px) {
+    .navegacion--izquierda li:nth-child(2){
+        display: none;
+    }
+}
+.navegacion--izquierda li:nth-child(3),
+.navegacion--izquierda li:nth-child(4),
+.navegacion--izquierda li:nth-child(5),
+.navegacion--izquierda li:nth-child(6),
+.navegacion--izquierda li:nth-child(7){
+    display: none;
+}
+@media (min-width:992px) {
+    .navegacion--izquierda li:nth-child(3),
+    .navegacion--izquierda li:nth-child(4),
+    .navegacion--izquierda li:nth-child(5),
+    .navegacion--izquierda li:nth-child(6),
+    .navegacion--izquierda li:nth-child(7){
+        display: flex;
+    }
+}
+/* Menu derecha */
+.navegacion--derecha li:nth-child(1),
+.navegacion--derecha li:nth-child(4)
+{
+    width: 25px;
+}
+.usuario{
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.navegacion--derecha li:nth-child(1),
+.navegacion--derecha li:nth-child(2),
+.navegacion--derecha li:nth-child(3),
+.navegacion--derecha li:nth-child(4){
+    display: none;
+}
+@media (min-width:330px) {
+    .navegacion--derecha li:nth-child(1),
+    .navegacion--derecha li:nth-child(4){
+        display: flex;
+    }
+}
+@media (min-width:992px) {
+    .navegacion--derecha li:nth-child(2),
+    .navegacion--derecha li:nth-child(3){
+        display: flex;
+    }
+}
+/* imagotipo */
+.imagotipo{
+    flex: 1;
+    width: 95%;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 15px;
+}
+.imagotipo--imagen{
+    min-width: 500px;
+}
+.imagotipo--info{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.imagotipo--info p{
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 10px;
+}
+.imagotipo--info p:nth-child(1){
+    border: 1px solid white;
+    background-color: white;
+    cursor: pointer;
+}
+.imagotipo--info p:nth-child(2){
+    border: 1px solid #6d6d63b3;
+    background-color: #6d6d63b3;
+    cursor: pointer;
+    color: white;
+}
+.imagotipo--info p:nth-child(1):hover,
+.imagotipo--info p:nth-child(2):hover{
+    background-color: transparent;
+    color: white;
+}
+/* footer */
+.footer{
+    padding-top: 20px;
+    background-color: black;
+}
+.footer--contenedor{
+    width: 95%;
+    margin-inline:auto;
+}
+.iconos{
+    display: flex;
+    gap: 20px;
+}
+.iconos li{
+    width: 30px;
+    height: 30px;
+}
+
+.informacion{
+    display: grid;
+    color: rgb(133, 133, 133);
+    gap: 20px;
+    margin-block:20px;
+    font-size: 15px;
+}
+@media (min-width:400px) {
+    .informacion{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media (min-width:768px) {
+    .informacion{
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+@media (min-width:992px) {
+    .informacion{
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+.informacion p:hover{
+    color: white;
+}
+.idioma{
+    color: white;
+    padding: 8px;
+    font-weight: 700;
+}
+.contruccion{
+    color: white;
+    padding: 10px;
+    font-weight: 900;
+    text-align: center;
+}
+.catalogos{
+    padding-block: 2px;
+    background-color: black;
+    color: white;
+}
+.catalogo--peliculas{
+    width: 95%;
+    margin-inline: auto;
+}
+.catalogo--peliculas h1,
+.catalogo--peliculas h2{
+    padding: 10px;
+}
+
+.peliculas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+}
+
+.peliculas::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+}
+
+.pelicula {
+    height: auto;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+}
+
+.pelicula img {
+    width: 100%;
+    height: 100%;
+}
+
+.pelicula:hover {
+    transform: scale(1.12); /* Aumentamos la escala al 110% al pasar el ratón */
+}
+
+/* DIV CARDS */
+
+.card {
+    background: rgba(172, 7, 226, 0.5);
+    position: relative;
+    max-width: 250px;
+    height: 350px;
+    border-radius: 5px;
+    padding: 1rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 7.5px;
+    transition: 0.5s ease;
+    color: white;
+}
+  
+.card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+          35.36% 35.36% at 100% 25%,
+          #0000 66%,
+          #c79013 68% 70%,
+          #0000 72%
+        )
+        32px 32px / calc(2 * 32px) calc(2 * 32px),
+      radial-gradient(
+          35.36% 35.36% at 0 75%,
+          #0000 66%,
+          #c79013 68% 70%,
+          #0000 72%
+        )
+        32px 32px / calc(2 * 32px) calc(2 * 32px),
+      radial-gradient(
+          35.36% 35.36% at 100% 25%,
+          #0000 66%,
+          #c79013 68% 70%,
+          #0000 72%
+        )
+        0 0 / calc(2 * 32px) calc(2 * 32px),
+      radial-gradient(
+          35.36% 35.36% at 0 75%,
+          #0000 66%,
+          #c79013 68% 70%,
+          #0000 72%
+        )
+        0 0 / calc(2 * 32px) calc(2 * 32px),
+      repeating-conic-gradient(#295b3f 0 25%, #0000 0 50%) 0 0 / calc(2 * 32px)
+        calc(2 * 32px),
+      radial-gradient(#0000 66%, #c79013 68% 70%, #0000 72%) 0 calc(32px / 2) /
+        32px 32px #295b3f;
+    opacity: 0.5;
+    transition: 0.3s ease;
+}
+  
+.card:hover::after {
+    opacity: 0.25;
+}
+  
+.cardHeader {
+    text-transform: uppercase;
+    position: relative;
+    width: max-content;
+    font-weight: bold;
+    transition: all 0.5s ease;
+}
+.cardHeader::after {
+    content: "";
+    width: calc(100% + 1rem);
+    height: 2.5px;
+    transform: translateX(calc(-100% - 1rem));
+    background: aqua;
+    bottom: -2px;
+    left: 0;
+    position: absolute;
+    opacity: 0;
+}
+  
+.details {
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    transform: translateY(95%);
+    transition: all 0.5s ease;
+}
+  
+.button {
+    background-color: aqua;
+    color: black;
+    padding: 2.5px 5px;
+    width: max-content;
+    border-radius: 2.5px;
+}
+.card:hover .details {
+    transform: translateY(0%);
+    transition-delay: 0.5s;
+}
+.card:hover .cardHeader::after {
+    transform: translateX(-1rem);
+    transition: 0.5s ease;
+    opacity: 1;
+}
+.card:hover {
+    transform: scale(1.1);
+    border-radius: 15px;
+}
+
+.detalles {
+    width: 50%;
+}
+
+.detalles p {
+    color: white;
+    font-size: 1.5rem;
+}
+
+.textos2 {
+    color: white;
+    font-size: 0.5rem;
+}
+
+.masdetalles {
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.masdetalles p {
+    font-size: 1.2rem;
+}
+
+/* Estilos para la primera sección con posición relativa */
+.div1 {
+    position: relative;
+}
+
+/* Estilos para la segunda sección con posición absoluta y transición de opacidad */
+.div1 .div2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: .5s;
+}
+
+/* Efecto de opacidad al pasar el ratón sobre la sección */
+.div1:hover .div2 {
+    opacity: 1;
+}
+
+.like {
+    width: 4.2%;
+}
+
+/* Estilo para los botones de like y like-blanco */
+.like-button, .like-blanco-button, .dislike-button, .dislike-blanco-button {
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+}
+
+/* Estilo para el contenedor de like y dislike */
+.like-container, .dislike-container {
+    position: relative;
+    display: inline-block;
+    width: 4.5%;
+}
+
+/* Estilo para los botones de like-blanco y dislike-blanco */
+.like-blanco-button, .dislike-blanco-button {
+    position: absolute;
+    top: 0;
+    left: 3%;
+    z-index: 1; /* Asegura que el botón blanco esté encima del botón like */
+}
+
+/* SCROLLBAR */
+
+/* Tamaño barra de desplazamiento */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Color fondo de la barra de desplazamiento */
+::-webkit-scrollbar-track {
+    background-color: #4E769E;
+}
+
+/* Color barra de desplazamiento */
+::-webkit-scrollbar-thumb {
+    background-color: #4E769E;
+    border-radius: 15px;
+}
+
+/* Cuando paso el ratón por encima */
+::-webkit-scrollbar-thumb:hover {
+    background-color: #ffffff;
+}
+
+.tablas {
+    margin-top: 40px;
+}
+
+/* Estilos para la tabla */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    color: white;
+}
+
+.table th,
+.table td {
+    text-align: left;
+    padding: 8px;
+}
+
+.table tr:hover {
+    background-color: black;
+}
+
+/* Estilos para la clase mt-3 */
+.mt-3 {
+    margin-top: 3rem !important;
+}
+
+#administraciones {
+    height: 28px;
+    border-radius: 1vh 1vh 1vh 1vh;
+    border: 2px solid #4E769E;
+    background-color: white;
+    color: black;
+    transition: all 0.3s ease 0s;
+    padding-left: 2px;
+}
+
+#administraciones:hover {
+    background: #1A426A;
+    color: white;
+}
+
+.header {
+    margin-left: 100px;
+    margin-right: 90px;
+    color: white;
+}
+
+#administrar {
+    border-radius: 1vh 1vh 1vh 1vh;
+    background-color: white;
+    color: #4E769E;
+}
+
+/***********************************/
+
+/* Estilos para botones con efecto de hover */
+.btn {
+    position: relative;
+    padding: 20px 50px;
+    text-decoration: none;
+    color: #fff;
+    letter-spacing: 5px;
+    text-indent: 10px;
+    z-index: 2;
+    font-size: 20px;
+}
+
+.btn-1 {
+    overflow: hidden;
+    border: 2px solid #4E769E;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.btn-1::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 200%;
+    left: 0;
+    top: -200%;
+    background-color: #1A426A;
+    border-radius: 50%;
+    transition: all 0.6s ease;
+    z-index: -1;
+}
+
+.btn-1:hover:before {
+    top: 0;
+    border-radius: 0%;
+}
+
+/* Estilos para botones */
+
+#editar {
+    height: 35px;
+    width: 55px;
+    border-radius: 1vh 1vh 1vh 1vh;
+    border: 3px solid #4E769E;
+    background-color: #000000;
+    color: white;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+
+#eliminar {
+    height: 35px;
+    width: 70px;
+    border-radius: 1vh 1vh 1vh 1vh;
+    border: 3px solid #4E769E;
+    background-color: #000000;
+    color: white;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+#activar {
+    height: 35px;
+    width: 70px;
+    border-radius: 1vh 1vh 1vh 1vh;
+    border: 3px solid #4E769E;
+    background-color: #000000;
+    color: white;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.estilosTh {
+    border-top-width: 2px;
+    border-top: 2px solid #1A426A;
+    border-bottom: 2px solid #1A426A;
+}
+
+.estilosTd {
+    border-top-width: 2px;
+    border-bottom: 2px solid #1A426A;
+}
+
+.estilosTd2 {
+    border-top-width: 2px;
+    border-bottom: 2px solid #1A426A;
+    padding-left: 0px;
+}
+
+.estilosTd3 {
+    border-top-width: 2px;
+    border-bottom: 2px solid #1A426A;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+#titulo {
+    display: flex;
+    justify-content: center;
+    font-size: 4.5rem;
+    color: white;
+}
+
+.textos5 {
+    color: #03cc57;
+    font-size: 24px;
+    padding-left: 20px;
+    text-decoration: underline;
+    font-family: 'Dosis', sans-serif;
+    font-family: 'Trispace', sans-serif;
+}
+
+.actoresRelaciones {
+    display: flex;
+    justify-content: space-around;
+}
+
+.directoresRelaciones {
+    display: flex;
+    justify-content: space-around;
+}
+
+.d-none {
+    display: none;
+}
+
+.admins {
+    width: 8%;
+}
+
+.tab-content {
+    display: none;
+}
