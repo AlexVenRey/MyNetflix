@@ -229,3 +229,9 @@ body::before {
         padding-bottom: 2vh;
     }
 }
+    .container {
+        width: 290px;
+        padding: 4vh;
+        padding-bottom: 2vh;
+    }
+}

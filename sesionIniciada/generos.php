@@ -2,7 +2,7 @@
 try {
     session_start();
     if ($_SESSION["id_usuarios"]) {
-        include_once("./conexion/conexion.php");
+        include_once("../conexion/conexion.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +13,7 @@ try {
     <title>BlueVideo - Inicio</title>
     <!-- <link rel="stylesheet" href="normalize.css"> -->
     <link rel="stylesheet" href="index.css">
-    <link rel="shortcut icon" href="./img/logo_bluevideo (1).png" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/logo_bluevideo (1).png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400&display=swap" rel="stylesheet">
@@ -35,13 +35,13 @@ try {
         ?>
         <video id="backgroundVideo" muted autoplay loop poster="./video/sueños de fuga trailer.mp4">
             <source src="./video/sueños de fuga trailer.mp4" type="video/mp4">
-            <img id="backgroundImage" src="./img/sueno_de_fuga.jpg" alt="Imagen de fondo">
+            <img id="backgroundImage" src="../img/sueno_de_fuga.jpg" alt="Imagen de fondo">
         </video>
         <div class="banner">
             <div class="menu">
                 <nav>
                     <ul class="navegacion navegacion--izquierda">
-                        <li class="logo"><a href="#"><img src="./img/texto_bluevideo (1).png" alt="BlueVideo" style="height: 35px; width: 250px;"></a></li>
+                        <li class="logo"><a href="#"><img src="../img/texto_bluevideo (1).png" alt="BlueVideo" style="height: 35px; width: 250px;"></a></li>
                         <br>
                         <li><a href="./index.php">Inicio</a></li>
                         <li><a href="./generos.php">Géneros</a></li>
@@ -51,7 +51,7 @@ try {
             </div>
             <div class="imagotipo">
                 <div class="imagotipo--imagen" style="width: 60%;">
-                    <img id="logoImage" src="./img/logo_sueno_de_fuga.jpg" alt="Logo película" style="width:50%;">
+                    <img id="logoImage" src="../img/logo_sueno_de_fuga.jpg" alt="Logo película" style="width:50%;">
                 </div>
                 <div class="detalles">
                     <p id="detallesText">Dos hombres encarcelados entablan una amistad a lo largo de los años, encontrando consuelo y redención eventual a través de actos de decencia común.</p>
@@ -62,6 +62,29 @@ try {
                        <p id="directorText">Frank Darabont</p>
                        <i class="bi bi-dot"></i>
                        <p id="actoresText">Tim Robbins, Morgan Freeman, Matt Damon</p>
+                    </div>
+                </div>
+                <div class="imagotipo--info">
+                    <p>⏵Ver</p>
+                    <br>
+                    <!-- Like -->
+                    <div class="like-container" pelicula-id="<?php if (isset($pelicula['IdPelicula'])) { echo $pelicula['IdPelicula']; } else {} ?>" usuario-id="<?php echo $_SESSION["id_usuarios"]; ?>" accion="like">
+                        <a href="#" class="like-button" onmouseover="mostrarLikeBlanco(this)" onmouseout="ocultarLikeBlanco(this)" onclick="darLike('like')">
+                            <img src="../img/like.jpg" alt="">
+                        </a>
+                        <a href="#" class="like-blanco-button" style="display: none;">
+                            <img src="../img/like_blanco.jpg" alt="">
+                        </a>
+                    </div>
+                    
+                    <!-- Dislike -->
+                    <div class="dislike-container" pelicula-id="<?php if (isset($pelicula['IdPelicula'])) { echo $pelicula['IdPelicula']; } else {} ?>" usuario-id="<?php echo $_SESSION["id_usuarios"]; ?>" accion="dislike">
+                        <a href="#" class="dislike-button" onmouseover="mostrarDislikeBlanco(this)" onmouseout="ocultarDislikeBlanco(this)" onclick="darDislike('dislike')">
+                            <img src="../img/dislike.jpg" alt="">
+                        </a>
+                        <a href="#" class="dislike-blanco-button" style="display: none;">
+                            <img src="../img/dislike_blanco.png" alt="">
+                        </a>
                     </div>
                 </div>
             </div>
@@ -76,7 +99,7 @@ try {
                 ?>
                 <article class="pelicula">
                     <a href="<?php echo $pelicula['Pelicula']; ?>" onclick="cambiarVideo('<?php echo $pelicula['Trailer']; ?>', '<?php echo $pelicula['Portada']; ?>', '<?php echo $pelicula['Logo']; ?>', '<?php echo $pelicula['Descripcion']; ?>', '<?php echo $pelicula['Genero']; ?>', '<?php echo $pelicula['Director']; ?>', '<?php echo $pelicula['Actor']; ?>', '<?php echo $pelicula['IdPelicula'] ?>')">
-                        <img src="./img/<?php echo $pelicula['Portada']; ?>" alt="">
+                        <img src="../img/<?php echo $pelicula['Portada']; ?>" alt="">
                     </a>
                 </article>
                 <?php
@@ -103,7 +126,7 @@ try {
                 ?>
                 <article class="pelicula">
                     <a href="<?php echo $pelicula2['Pelicula']; ?>" onclick="cambiarVideo('<?php echo $pelicula2['Trailer']; ?>', '<?php echo $pelicula2['Portada']; ?>', '<?php echo $pelicula2['Logo']; ?>', '<?php echo $pelicula2['Descripcion']; ?>', '<?php echo $pelicula2['Genero']; ?>', '<?php echo $pelicula2['Director']; ?>', '<?php echo $pelicula2['Actor']; ?>', '<?php echo $pelicula2['IdPelicula'] ?>')">
-                        <img src="./img/<?php echo $pelicula2['Portada']; ?>" alt="">
+                        <img src="../img/<?php echo $pelicula2['Portada']; ?>" alt="">
                     </a>
                 </article>
                 <?php
@@ -129,7 +152,7 @@ try {
                 ?>
                 <article class="pelicula">
                     <a href="<?php echo $pelicula3['Pelicula']; ?>" onclick="cambiarVideo('<?php echo $pelicula3['Trailer']; ?>', '<?php echo $pelicula3['Portada']; ?>', '<?php echo $pelicula3['Logo']; ?>', '<?php echo $pelicula3['Descripcion']; ?>', '<?php echo $pelicula3['Genero']; ?>', '<?php echo $pelicula3['Director']; ?>', '<?php echo $pelicula3['Actor']; ?>', '<?php echo $pelicula3['IdPelicula'] ?>')">
-                        <img src="./img/<?php echo $pelicula3['Portada']; ?>" alt="">
+                        <img src="../img/<?php echo $pelicula3['Portada']; ?>" alt="">
                     </a>
                 </article>
                 <?php
@@ -155,7 +178,7 @@ try {
                 ?>
                 <article class="pelicula">
                     <a href="<?php echo $pelicula4['Pelicula']; ?>" onclick="cambiarVideo('<?php echo $pelicula4['Trailer']; ?>', '<?php echo $pelicula4['Portada']; ?>', '<?php echo $pelicula4['Logo']; ?>', '<?php echo $pelicula4['Descripcion']; ?>', '<?php echo $pelicula4['Genero']; ?>', '<?php echo $pelicula4['Director']; ?>', '<?php echo $pelicula4['Actor']; ?>', '<?php echo $pelicula4['IdPelicula'] ?>')">
-                        <img src="./img/<?php echo $pelicula4['Portada']; ?>" alt="">
+                        <img src="../img/<?php echo $pelicula4['Portada']; ?>" alt="">
                     </a>
                 </article>
                 <?php
@@ -167,10 +190,10 @@ try {
     <footer class="footer">
         <div class="footer--contenedor">
             <ul class="iconos">
-                <li><a href="#"><img src="Multimedia/facebook.svg" alt="facebook"></a></li>
-                <li><a href="#"><img src="Multimedia/instagram.svg" alt="instagram"></a></li>
-                <li><a href="#"><img src="Multimedia/github.svg" alt="github"></a></li>
-                <li><a href="#"><img src="Multimedia/linkedin.svg" alt="linkedin"></a></li>
+                <li><a href="#"><img src="../Multimedia/facebook.svg" alt="facebook"></a></li>
+                <li><a href="#"><img src="../Multimedia/instagram.svg" alt="instagram"></a></li>
+                <li><a href="#"><img src="../Multimedia/github.svg" alt="github"></a></li>
+                <li><a href="#"><img src="../Multimedia/linkedin.svg" alt="linkedin"></a></li>
             </ul>
             <div class="informacion">
                 <p>Preguntas frecuentes</p>

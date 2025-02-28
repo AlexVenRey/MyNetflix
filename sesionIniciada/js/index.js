@@ -57,7 +57,7 @@ function darDislike(accion) {
     var peliculaId = dislikeContainer.getAttribute("pelicula-id");
     var usuarioId = dislikeContainer.getAttribute("usuario-id");
 
-    var url = "./sesionIniciada/DarLike.php?peliculaId=" + peliculaId + "&usuarioId=" + usuarioId + "&accion=" + accion;
+    var url = "./DarLike.php?peliculaId=" + peliculaId + "&usuarioId=" + usuarioId + "&accion=" + accion;
 
     // Redirecciona a la URL
     window.location.href = url;

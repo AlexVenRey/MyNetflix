@@ -185,10 +185,10 @@ try {
     <footer class="footer">
         <div class="footer--contenedor">
             <ul class="iconos">
-                <li><a href="#"><img src="Multimedia/facebook.svg" alt="facebook"></a></li>
-                <li><a href="#"><img src="Multimedia/instagram.svg" alt="instagram"></a></li>
-                <li><a href="#"><img src="Multimedia/github.svg" alt="github"></a></li>
-                <li><a href="#"><img src="Multimedia/linkedin.svg" alt="linkedin"></a></li>
+                <li><a href="#"><img src="../Multimedia/facebook.svg" alt="facebook"></a></li>
+                <li><a href="#"><img src="../Multimedia/instagram.svg" alt="instagram"></a></li>
+                <li><a href="#"><img src="../Multimedia/github.svg" alt="github"></a></li>
+                <li><a href="#"><img src="../Multimedia/linkedin.svg" alt="linkedin"></a></li>
             </ul>
             <div class="informacion">
                 <p>Preguntas frecuentes</p>

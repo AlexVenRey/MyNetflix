@@ -41,9 +41,12 @@ a{
 .banner{
     display: flex;
     flex-direction: column;
+    justify-content: center;
     width: 100%;
-    height: auto;
+    height: 100vh;
+    /* overflow: hidden; */
     position: absolute;
+    background-color: #4E769E;
 }
 /* Menu */
 .menu{
@@ -454,12 +457,12 @@ a{
 
 /* Color fondo de la barra de desplazamiento */
 ::-webkit-scrollbar-track {
-    background-color: #4E769E;
+    background-color: #000000;
 }
 
 /* Color barra de desplazamiento */
 ::-webkit-scrollbar-thumb {
-    background-color: #4E769E;
+    background-color: #000000;
     border-radius: 15px;
 }
 
@@ -502,7 +505,7 @@ a{
     background-color: white;
     color: black;
     transition: all 0.3s ease 0s;
-    padding-left: 2px;
+    padding-left: 4px;
 }
 
 #administraciones:hover {
@@ -512,7 +515,7 @@ a{
 
 .header {
     margin-left: 100px;
-    margin-right: 90px;
+    margin-right: 100px;
     color: white;
 }
 
@@ -575,53 +578,16 @@ a{
     font-size: 15px;
 }
 
-
 #eliminar {
     height: 35px;
-    width: 70px;
+    width: 65px;
     border-radius: 1vh 1vh 1vh 1vh;
     border: 3px solid #4E769E;
     background-color: #000000;
     color: white;
     transition: all 0.3s ease 0s;
     cursor: pointer;
-    font-size: 15px;
-}
-
-#activar {
-    height: 35px;
-    width: 70px;
-    border-radius: 1vh 1vh 1vh 1vh;
-    border: 3px solid #4E769E;
-    background-color: #000000;
-    color: white;
-    transition: all 0.3s ease 0s;
-    cursor: pointer;
-    font-size: 15px;
-}
-
-.estilosTh {
-    border-top-width: 2px;
-    border-top: 2px solid #1A426A;
-    border-bottom: 2px solid #1A426A;
-}
-
-.estilosTd {
-    border-top-width: 2px;
-    border-bottom: 2px solid #1A426A;
-}
-
-.estilosTd2 {
-    border-top-width: 2px;
-    border-bottom: 2px solid #1A426A;
-    padding-left: 0px;
-}
-
-.estilosTd3 {
-    border-top-width: 2px;
-    border-bottom: 2px solid #1A426A;
-    padding-left: 0px;
-    padding-right: 0px;
+    font-size: 14px;
 }
 
 #titulo {
@@ -632,32 +598,43 @@ a{
 }
 
 .textos5 {
-    color: #03cc57;
+    color: white;
     font-size: 24px;
-    padding-left: 20px;
     text-decoration: underline;
-    font-family: 'Dosis', sans-serif;
-    font-family: 'Trispace', sans-serif;
 }
 
-.actoresRelaciones {
+/* Estilos para elementos con id 'filtrar' */
+#editarAdmin {
+    border-radius: 2vh;
+    background-color: white;
+    color: #4E769E;
+}
+
+.inputs {
+    padding-top: 15px;
+}
+
+#divRutas {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
 }
 
-.directoresRelaciones {
-    display: flex;
-    justify-content: space-around;
+#imgRutas {
+    width: 2%;
+    border-radius: 20px;
+    padding-bottom: 12px;
 }
 
-.d-none {
-    display: none;
+#logoRutas {
+    width: 15%;
+    border-radius: 20px;
+    padding-bottom: 12px;
 }
 
-.admins {
-    width: 8%;
-}
-
-.tab-content {
-    display: none;
+#vidRutas {
+    height: 25vh;
+    width: 50vh;
+    border-radius: 20px;
+    padding-bottom: 12px;
+    position: static;
 }
