@@ -1,18 +1,34 @@
 <?php
+
     include_once('../../conexion/conexion.php');
-    $id_usuarios = $_GET['id_usuarios'];
-    $eliminarUsuario = $conn->prepare("DELETE FROM usuarios WHERE id_usuarios = :id_usuarios");
-    $eliminarUsuario->bindParam(':id_usuarios', $id_usuarios);
-    $eliminarUsuario->execute();
 
-    echo "<script>
-    Swal.fire({
-        icon: 'success',
-        title: 'Usuario Eliminado',
-        text: 'El usuario ha sido eliminado.'
-    }).then(() => {
-        window.location.href = '../administrar.php';
-    });
-    </script>";
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+        $datos = json_decode(file_get_contents("php://input"), true);
+    
+        if (isset($datos['id_usuarios'])) {
+
+            $id_usuarios = $datos['id_usuarios'];
+    
+            $eliminarUsuario = $conn->prepare("DELETE FROM usuarios WHERE id_usuarios = :id_usuarios");
+            $eliminarUsuario->bindParam(':id_usuarios', $id_usuarios);
+    
+            $eliminarUsuario->execute();
+
+            echo json_encode(['success' => true]);
+            
+        } else {
+
+            echo json_encode(['success' => false, 'error' => 'ID de usuario no recibido.']);
+
+        }
+        
+    } else {
+        
+        echo json_encode(['success' => false, 'error' => 'Método de solicitud inválido.']);
+
+    }
+    
+    $conn = null;
+    exit();
 ?>

@@ -3,46 +3,50 @@
     include_once('../../conexion/conexion.php');
 
     try {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-        // Iniciar la transacción
-        $conn->beginTransaction();
+            $datos = json_decode(file_get_contents("php://input"), true);
 
-        $id_genero = $_GET['id_genero'];
+            if (isset($datos['id_genero'])) {
 
-        $eliminarPelicula = $conn->prepare("DELETE FROM peliculas WHERE genero = :id_genero");
-        $eliminarPelicula->bindParam(':id_genero', $id_genero);
-        $eliminarPelicula->execute();
+                // Iniciar la transacción
+                $conn->beginTransaction();
+    
+                $id_genero = $datos['id_genero'];
+    
+                $eliminarPelicula = $conn->prepare("DELETE FROM peliculas WHERE genero = :id_genero");
+                $eliminarPelicula->bindParam(':id_genero', $id_genero);
+                $eliminarPelicula->execute();
+    
+                $eliminarGenero = $conn->prepare("DELETE FROM genero WHERE id_genero = :id_genero");
+                $eliminarGenero->bindParam(':id_genero', $id_genero);
+                $eliminarGenero->execute();
+    
+                // Confirmar los cambios (commit)
+                $conn->commit();
 
+                echo json_encode(['success' => true]);
 
-        $eliminarGenero = $conn->prepare("DELETE FROM genero WHERE id_genero = :id_genero");
-        $eliminarGenero->bindParam(':id_genero', $id_genero);
-        $eliminarGenero->execute();
+                exit();
+                
+            } else {
 
-        // Confirmar los cambios (commit)
-        $conn->commit();
+                echo json_encode(['success' => false, 'error' => 'ID de género no recibido.']);
+                exit();
+                
+            }
 
-        echo "<script>
-        Swal.fire({
-            icon: 'success',
-            title: 'Género Eliminado',
-            text: 'El género y todas las películas asociadas han sido eliminados.'
-        }).then(() => {
-            window.location.href = '../administrar.php';
-        });
-        </script>";
+        } else {
+
+            echo json_encode(['success' => false, 'error' => 'Método de solicitud inválido.']);
+            exit();
+
+        }
 
     } catch (Exception $e) {
 
         $conn->rollBack();
-        echo "<script>
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Ocurrió un error al género o la película: " . $e->getMessage() . "'
-        }).then(() => {
-            window.location.href = '../administrar.php';
-        });
-        </script>";
+        echo json_encode(['success' => false, 'error' => 'Error al eliminar: ' . $e->getMessage()]);
 
     }
 
