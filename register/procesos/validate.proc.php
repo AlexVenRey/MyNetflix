@@ -8,9 +8,7 @@ function validaCampoVacio($campo) {
     }
     return $error;
 }
-?>
 
-<?php
 if (!filter_has_var(INPUT_POST, 'register')) {
     header('Location: '.'./register.proc.php');
     exit();
