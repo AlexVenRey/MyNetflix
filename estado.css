@@ -1,0 +1,28 @@
+#estadoDesactivado, #estadoRegistrado {
+    border-radius: 5px;
+    border: 2px solid black; /* Se asegura de que el borde sea visible */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 140px;
+    width: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    background-color: rgb(240, 240, 240);
+}
+
+#fotoAlerta {
+    display: block;
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+    width: 150px; /* Ajusta el tamaño según lo necesites */
+    margin-top: 90px;
+}
+
+body {
+    background-color: rgb(75, 80, 128);
+    font-family: 'Nunito', sans-serif;
+}
