@@ -18,6 +18,7 @@ function cambiarVideo(videoSrc, posterSrc, logoSrc, detallesSrc, generoSrc, dire
     video.src = './video/'+videoSrc;
     // Pasamos la ruta de la portada de la película seleccionada
     video.poster = './img/'+posterSrc;
+    
     // Recargamos el video (se aplican los cambios)
     video.load();
     // Reproducimos el nuevo vídeo

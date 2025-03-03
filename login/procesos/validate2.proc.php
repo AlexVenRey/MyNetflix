@@ -44,9 +44,15 @@ if ($consulta) {
     /*Creamos un hash que recojerá la contrasaena de la base de datos*/
     $id_usuarios=$consulta['id_usuarios'];
     $hashContrasena=$consulta['contrasena'];
+    $estado = $consulta['estado'];
     
     /*Comprobamos que la contrasena puesta sea igual a la de la base de datos (el hash)*/
     if (password_verify($contrasena, $hashContrasena)) {
+        if ($estado === 'desactivado') {
+            header("Location: ../../estado.php");
+            exit();
+        }
+
         /* Creamos la sesión */
         session_start();
         $_SESSION['loggedin'] = true;
