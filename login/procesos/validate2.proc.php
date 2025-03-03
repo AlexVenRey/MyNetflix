@@ -49,11 +49,11 @@ if ($consulta) {
     /*Comprobamos que la contrasena puesta sea igual a la de la base de datos (el hash)*/
     if (password_verify($contrasena, $hashContrasena)) {
         if ($estado === 'desactivado') {
-            header("Location: ../../estadoDesactivado.php");
+            header("Location: ../../estadoDesactivado.html");
             exit();
         }
         if ($estado === 'registrado') {
-            header("Location: ../../estadoRegistrado.php");
+            header("Location: ../../estadoRegistrado.html");
             exit();
         }
 

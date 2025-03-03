@@ -32,12 +32,10 @@ document.addEventListener("DOMContentLoaded", () => {
             // Mostrar filtros aplicados
             filtrosDiv.innerHTML = `
                 <p><strong>Filtros aplicados:</strong></p>
-                <ul>
-                    <li><strong>Nombre de la pelicula:</strong> ${nombrePelicula || "No especificado"}</li>    
-                    <li><strong>Director:</strong> ${director || "No especificado"}</li>
-                    <li><strong>Actor:</strong> ${actor || "No especificado"}</li>
-                    <li><strong>Género:</strong> ${genero || "No especificado"}</li>
-                </ul>
+                    <strong>Nombre de la pelicula:</strong> ${nombrePelicula || "No especificado"}  
+                    <strong> - Director:</strong> ${director || "No especificado"}
+                    <strong> - Actor:</strong> ${actor || "No especificado"}
+                    <strong> - Género:</strong> ${genero || "No especificado"}
             `;
 
             // Si no hay resultados
