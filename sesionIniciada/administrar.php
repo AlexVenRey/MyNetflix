@@ -122,11 +122,11 @@ try {
                     // Aplicar el filtrado si se hizo clic en el botón de añadir
                     if (isset($_POST['añadir'])) {
 
-                        $nombre = trim($_POST['nombre']);
-                        $apellidos = trim($_POST['apellidos']);
-                        $email = trim($_POST['email']);
-                        $contrasena = trim($_POST['contrasena']);
-                        $rol = $_POST['rol'];
+                        $nombre = htmlspecialchars(trim($_POST['nombre']));
+                        $apellidos = htmlspecialchars(trim($_POST['apellidos']));
+                        $email = htmlspecialchars(trim($_POST['email']));
+                        $contrasena = htmlspecialchars(trim($_POST['contrasena']));
+                        $rol = htmlspecialchars($_POST['rol']);
                     
                         // Validación: verificar si hay campos vacíos
                         if (empty($nombre) || empty($apellidos) || empty($email) || empty($contrasena) || empty($rol)) {
@@ -148,12 +148,12 @@ try {
                                     });
                                   </script>";
                         } 
-                        // Validación: verificar que la contraseña tenga al menos 6 caracteres
-                        elseif (strlen($contrasena) < 6) {
+                        // Validación: verificar que la contraseña tenga al menos 8 caracteres
+                        elseif (strlen($contrasena) < 8) {
                             echo "<script>
                                     Swal.fire({
                                         icon: 'error',
-                                        text: 'La contraseña debe tener al menos 6 caracteres',
+                                        text: 'La contraseña debe tener al menos 8 caracteres',
                                         confirmButtonText: 'OK'
                                     });
                                   </script>";
@@ -171,12 +171,14 @@ try {
                         // Si todas las validaciones pasan, insertar el usuario en la BD
                         else {
                             try {
+
+                                $contrasenaHasheada = password_hash($contrasena, PASSWORD_DEFAULT);
                                 $sqlInsertar = "INSERT INTO usuarios (nombre, apellidos, email, contrasena, rol) VALUES (:nombre, :apellidos, :email, :contrasena, :rol)";
                                 $stmtInsertar = $conn->prepare($sqlInsertar);
                                 $stmtInsertar->bindParam(':nombre', $nombre);
                                 $stmtInsertar->bindParam(':apellidos', $apellidos);
                                 $stmtInsertar->bindParam(':email', $email);
-                                $stmtInsertar->bindParam(':contrasena', $contrasena);
+                                $stmtInsertar->bindParam(':contrasena', $contrasenaHasheada);
                                 $stmtInsertar->bindParam(':rol', $rol);
                                 $stmtInsertar->execute();
                     
@@ -225,15 +227,15 @@ try {
 
                                 $contraseña = ($fila['Contraseña'] != null && $fila['Contraseña'] != '') ? "········" : "No hay contraseña";
                                 echo "<tr>
-                                    <td class='estilosTd'>".$fila['id_usuarios']."</td>
-                                    <td class='estilosTd'>".$fila['Nombre']."</td>
-                                    <td class='estilosTd'>".$fila['Apellidos']."</td>
-                                    <td class='estilosTd'>".$fila['Correo']."</td>
-                                    <td class='estilosTd'>".$contraseña."</td>
-                                    <td class='estilosTd'>".$fila['Rol']."</td>
-                                    <td class='estilosTd2'><a href='./proc/editarUsuarios.php?id_usuarios=" . $fila['id_usuarios'] . "'><button id='editar'>Editar</button></a></td>
+                                    <td class='estilosTd'>".htmlspecialchars($fila['id_usuarios'])."</td>
+                                    <td class='estilosTd'>".htmlspecialchars($fila['Nombre'])."</td>
+                                    <td class='estilosTd'>".htmlspecialchars($fila['Apellidos'])."</td>
+                                    <td class='estilosTd'>".htmlspecialchars($fila['Correo'])."</td>
+                                    <td class='estilosTd'>".htmlspecialchars($contraseña)."</td>
+                                    <td class='estilosTd'>".htmlspecialchars($fila['Rol'])."</td>
+                                    <td class='estilosTd2'><a href='./proc/editarUsuarios.php?id_usuarios=" . htmlspecialchars($fila['id_usuarios']) . "'><button id='editar'>Editar</button></a></td>
                                     <td class='estilosTd3'>
-                                        <button id='eliminar' class='btnEliminarUsuarios' data-usuario-id='". $fila['id_usuarios'] ."' >Eliminar</button>
+                                        <button id='eliminar' class='btnEliminarUsuarios' data-usuario-id='". htmlspecialchars($fila['id_usuarios']) ."' >Eliminar</button>
                                     </td>
                                 </tr>";
                             } 
@@ -305,11 +307,11 @@ try {
                     // Aplicar el filtrado si se hizo clic en el botón de filtrar
                     if (isset($_POST['añadir2'])) {
 
-                        $pelicula = $_POST['pelicula'];
-                        $descripcion = $_POST['descripcion'];
-                        $ano = $_POST['ano'];
-                        $genero = $_POST['genero'];
-                        $edad = $_POST['edad'];
+                        $pelicula = htmlspecialchars($_POST['pelicula']);
+                        $descripcion = htmlspecialchars($_POST['descripcion']);
+                        $ano = htmlspecialchars($_POST['ano']);
+                        $genero = htmlspecialchars($_POST['genero']);
+                        $edad = htmlspecialchars($_POST['edad']);
                         $portada = "";
                         $logo = "";
 
@@ -429,12 +431,12 @@ try {
                                 foreach ($resultado2 as $fila2) {
 
                                     echo "<tr>
-                                    <td class='estilosTd'>".$fila2['id_pelicula']."</td>
-                                    <td class='estilosTd'>".$fila2['Pelicula']."</td>
-                                    <td class='estilosTd'>".$fila2['Descripcion']."</td>
-                                    <td class='estilosTd'>".$fila2['Año']."</td>
-                                    <td class='estilosTd'>".$fila2['Genero']."</td>
-                                    <td class='estilosTd'>".$fila2['Edad']."</td>
+                                    <td class='estilosTd'>".htmlspecialchars($fila2['id_pelicula'])."</td>
+                                    <td class='estilosTd'>".htmlspecialchars($fila2['Pelicula'])."</td>
+                                    <td class='estilosTd'>".htmlspecialchars($fila2['Descripcion'])."</td>
+                                    <td class='estilosTd'>".htmlspecialchars($fila2['Año'])."</td>
+                                    <td class='estilosTd'>".htmlspecialchars($fila2['Genero'])."</td>
+                                    <td class='estilosTd'>".htmlspecialchars($fila2['Edad'])."</td>
                                     <td class='estilosTd'>";
                                     
                                     if ($fila2['Portada'] === "" || $fila2['Portada'] === NULL) {
@@ -515,7 +517,7 @@ try {
 
                     if (isset($_POST['añadir3'])) {
 
-                        $actor = trim($_POST['actor']);
+                        $actor = htmlspecialchars(trim($_POST['actor']));
 
                         if (empty($actor)) {
                             echo "<script>
@@ -569,11 +571,11 @@ try {
 
                             foreach ($resultado4 as $fila4) {
                                 echo "<tr>
-                                        <td class='estilosTd'>".$fila4['id_actor']."</td>
-                                        <td class='estilosTd'>".$fila4['nombre_actor']."</td>
-                                        <td class='estilosTd'><a href='./proc/editarActor.php?id_actor=".$fila4['id_actor']."'><button id='editar'>Editar</button></a></td>
+                                        <td class='estilosTd'>".htmlspecialchars($fila4['id_actor'])."</td>
+                                        <td class='estilosTd'>".htmlspecialchars($fila4['nombre_actor'])."</td>
+                                        <td class='estilosTd'><a href='./proc/editarActor.php?id_actor=".htmlspecialchars($fila4['id_actor'])."'><button id='editar'>Editar</button></a></td>
                                         <td class='estilosTd'>
-                                            <button id='eliminar' class='btnEliminarActor' data-actor-id=".$fila4['id_actor'].">Eliminar</button>
+                                            <button id='eliminar' class='btnEliminarActor' data-actor-id=".htmlspecialchars($fila4['id_actor']).">Eliminar</button>
                                         </td>
                                     </tr>";
                             }
@@ -626,8 +628,8 @@ try {
                     <?php
                     if (isset($_POST['añadir4'])) {
 
-                        $actor = trim($_POST['actorRelacion']);
-                        $pelicula = trim($_POST['pelicula']);
+                        $actor = htmlspecialchars(trim($_POST['actorRelacion']));
+                        $pelicula = htmlspecialchars(trim($_POST['pelicula']));
 
                         // Validaciones
                         if (empty($actor) || empty($pelicula)) {
@@ -735,9 +737,9 @@ try {
                     <?php
 
                     if (isset($_POST['añadir5'])) {
-                        $director = trim($_POST['director']);
 
-                        // Validaciones
+                        $director = htmlspecialchars(trim($_POST['director']));
+
                         if (empty($director)) {
 
                             echo "<script>
@@ -793,11 +795,11 @@ try {
 
                             foreach ($resultado3 as $fila3) {
                                 echo "<tr>
-                                        <td class='estilosTd'>".$fila3['id_director']."</td>
-                                        <td class='estilosTd'>".$fila3['Nombre']."</td>
-                                        <td class='estilosTd'><a href='./proc/editarDirectores.php?id_director=" . $fila3['id_director'] . "'><button id='editar'>Editar</button></a></td>
+                                        <td class='estilosTd'>".htmlspecialchars($fila3['id_director'])."</td>
+                                        <td class='estilosTd'>".htmlspecialchars($fila3['Nombre'])."</td>
+                                        <td class='estilosTd'><a href='./proc/editarDirectores.php?id_director=" . htmlspecialchars($fila3['id_director']) . "'><button id='editar'>Editar</button></a></td>
                                         <td class='estilosTd'>
-                                            <button id='eliminar' class='btnEliminarDirector' data-director-id='".$fila3['id_director']."'>Eliminar</button>
+                                            <button id='eliminar' class='btnEliminarDirector' data-director-id='".htmlspecialchars($fila3['id_director'])."'>Eliminar</button>
                                         </td>
                                     </tr>";
                             }
@@ -850,8 +852,8 @@ try {
 
                     if (isset($_POST['añadir6'])) {
 
-                        $director = trim($_POST['directorRelacion']);
-                        $pelicula = trim($_POST['pelicula']);
+                        $director = htmlspecialchars(trim($_POST['directorRelacion']));
+                        $pelicula = htmlspecialchars(trim($_POST['pelicula']));
 
                         // Validaciones
                         if (empty($director) || empty($pelicula)) {
@@ -920,12 +922,12 @@ try {
 
                             foreach ($resultado5 as $fila5) {
                                 echo "<tr>
-                                        <td class='estilosTd'>".$fila5['id_director_pelicula']."</td>
-                                        <td class='estilosTd'>".$fila5['Director']."</td>
-                                        <td class='estilosTd'>".$fila5['Pelicula']."</td>
-                                        <td class='estilosTd'><a href='./proc/editarDirectorPelicula.php?id_director_pelicula=" . $fila5['id_director_pelicula'] . "'><button id='editar'>Editar</button></a></td>
+                                        <td class='estilosTd'>".htmlspecialchars($fila5['id_director_pelicula'])."</td>
+                                        <td class='estilosTd'>".htmlspecialchars($fila5['Director'])."</td>
+                                        <td class='estilosTd'>".htmlspecialchars($fila5['Pelicula'])."</td>
+                                        <td class='estilosTd'><a href='./proc/editarDirectorPelicula.php?id_director_pelicula=" . htmlspecialchars($fila5['id_director_pelicula']) . "'><button id='editar'>Editar</button></a></td>
                                         <td class='estilosTd'>
-                                            <button id='eliminar' class='btnEliminarDirectorPelicula' data-director-pelicula-id='".$fila5['id_director_pelicula']."'>Eliminar</button>
+                                            <button id='eliminar' class='btnEliminarDirectorPelicula' data-director-pelicula-id='".htmlspecialchars($fila5['id_director_pelicula'])."'>Eliminar</button>
                                         </td>
                                     </tr>";
                             }
@@ -969,7 +971,7 @@ try {
                             </script>";
                     } else {
                         try {
-                            $genero = $_POST['genero'];
+                            $genero = htmlspecialchars($_POST['genero']);
 
                             // Insertar el género en la base de datos
                             $sqlInsertar7 = "INSERT INTO genero (nombre) VALUES (:genero)";
@@ -1016,11 +1018,11 @@ try {
 
                         foreach ($resultado7 as $fila7) {
                             echo "<tr>
-                                    <td class='estilosTd'>".$fila7['id_genero']."</td>
-                                    <td class='estilosTd'>".$fila7['Genero']."</td>
-                                    <td class='estilosTd2'><a href='./proc/editarGeneros.php?id_genero=" . $fila7['id_genero'] . "'><button id='editar'>Editar</button></a></td>
+                                    <td class='estilosTd'>".htmlspecialchars($fila7['id_genero'])."</td>
+                                    <td class='estilosTd'>".htmlspecialchars($fila7['Genero'])."</td>
+                                    <td class='estilosTd2'><a href='./proc/editarGeneros.php?id_genero=" . htmlspecialchars($fila7['id_genero']) . "'><button id='editar'>Editar</button></a></td>
                                     <td class='estilosTd3'>
-                                        <button id='eliminar' class='btnEliminarGenero' data-genero-id='". $fila7['id_genero']."'>Eliminar</button>
+                                        <button id='eliminar' class='btnEliminarGenero' data-genero-id='". htmlspecialchars($fila7['id_genero'])."'>Eliminar</button>
                                     </td>
                                 </tr>";
                         } 
@@ -1039,7 +1041,7 @@ try {
             <h1 id="titulo">Roles</h1>
             <div class="tablas">
                 <header class="flex header">
-                    <form action='' method='post'>
+                    <form action='' method='POST'>
                         <label for="rol" class="textos">Rol:</label>
                         <input type="text" name="rol" id="administraciones" value="<?php if(isset($_POST['rol'])) {echo $_POST['rol'];} ?>">
                         <br><br>
@@ -1063,7 +1065,8 @@ try {
                             </script>";
                     } else {
                         try {
-                            $rol = $_POST['rol'];
+
+                            $rol = htmlspecialchars($_POST['rol']);
 
                             // Insertar el rol en la base de datos
                             $sqlInsertar8 = "INSERT INTO roles (rol) VALUES (:rol)";
@@ -1110,11 +1113,11 @@ try {
 
                         foreach ($resultado8 as $fila8) {
                             echo "<tr>
-                                    <td class='estilosTd'>".$fila8['id_rol']."</td>
-                                    <td class='estilosTd'>".$fila8['Rol']."</td>
-                                    <td class='estilosTd2'><a href='./proc/editarRoles.php?id_rol=" . $fila8['id_rol'] . "'><button id='editar'>Editar</button></a></td>
+                                    <td class='estilosTd'>".htmlspecialchars($fila8['id_rol'])."</td>
+                                    <td class='estilosTd'>".htmlspecialchars($fila8['Rol'])."</td>
+                                    <td class='estilosTd2'><a href='./proc/editarRoles.php?id_rol=" . htmlspecialchars($fila8['id_rol']) . "'><button id='editar'>Editar</button></a></td>
                                     <td class='estilosTd3'>
-                                        <button id='eliminar' class='btnEliminarRol' data-rol-id='".$fila8['id_rol']."'>Eliminar</button>
+                                        <button id='eliminar' class='btnEliminarRol' data-rol-id='".htmlspecialchars($fila8['id_rol'])."'>Eliminar</button>
                                     </td>
                                 </tr>";
                         } 
@@ -1153,10 +1156,10 @@ try {
                         foreach ($resultado8 as $fila8) {
 
                             echo "<tr>
-                                    <td class='estilosTd'>".$fila8['Nombre']."</td>
-                                    <td class='estilosTd'>".$fila8['Correo']."</td>
-                                    <td class='estilosTd'>".$fila8['Estado']."</td>
-                                    <td class='estilosTd2'><button id='activar' class='cambiarEstadoUsuario' data-usuario-id=".$fila8['id_usuarios'].">Cargando...</button></td>
+                                    <td class='estilosTd'>".htmlspecialchars($fila8['Nombre'])."</td>
+                                    <td class='estilosTd'>".htmlspecialchars($fila8['Correo'])."</td>
+                                    <td class='estilosTd'>".htmlspecialchars($fila8['Estado'])."</td>
+                                    <td class='estilosTd2'><button id='activar' class='cambiarEstadoUsuario' data-usuario-id=".htmlspecialchars($fila8['id_usuarios']).">Cargando...</button></td>
                                 </tr>";
                         } 
                         echo "</table>";
