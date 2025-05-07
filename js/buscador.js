@@ -47,4 +47,17 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Error al filtrar:", error);
         });
     };
+
+    // Detectar cuando se presiona Enter en los campos de entrada
+    const inputFields = document.querySelectorAll('#buscadorPelicula, #buscadorDirector, #buscadorActor, #buscadorGenero');
+
+    inputFields.forEach(input => {
+        input.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                filtrarPeliculas();
+            }
+        });
+    });
+
 });

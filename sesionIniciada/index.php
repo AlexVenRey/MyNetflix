@@ -168,7 +168,7 @@ try {
 
         </div>
             <!-- Mostramos los filtros usados -->
-            <div class="filtros-aplicados" id="filtros_aplicados"></div>
+            <div class="filtros-aplicados" style="padding-left: 20px;" id="filtros_aplicados"></div>
             <!-- Mostramos las peliculas obtenidas del filtro -->
             <div class="peliculas" id="resultados_filtro"></div>
     </main>
