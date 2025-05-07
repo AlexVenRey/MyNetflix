@@ -25,7 +25,7 @@ include_once("./conexion/conexion.php");
                 ON director_pelicula.id_pelicula = peliculas.id_pelicula JOIN directores ON directores.id_director = director_pelicula.id_director
                 JOIN actor_pelicula ON actor_pelicula.id_pelicula = peliculas.id_pelicula JOIN actores
                 ON actores.id_actor = actor_pelicula.id_actor JOIN genero ON genero.id_genero = peliculas.genero JOIN likes
-                ON likes.id_pelicula = peliculas.id_pelicula AND likes.`like/dislike` = 1 GROUP BY peliculas.id_pelicula, peliculas.nombre,
+                ON likes.id_pelicula = peliculas.id_pelicula AND likes.`like` = 1 GROUP BY peliculas.id_pelicula, peliculas.nombre,
                 peliculas.descripcion, peliculas.ano, genero.nombre, peliculas.portada, peliculas.trailer, peliculas.pelicula,
                 directores.nombre_director ORDER BY Likes DESC LIMIT 5;";
             $stmt1 = $conn->prepare($sql);
@@ -98,7 +98,7 @@ include_once("./conexion/conexion.php");
                     JOIN genero ON genero.id_genero = peliculas.genero
                     LEFT JOIN (
                         SELECT peliculas.id_pelicula FROM peliculas JOIN likes ON likes.id_pelicula = peliculas.id_pelicula
-                        AND likes.`like/dislike` = 1 GROUP BY peliculas.id_pelicula ORDER BY COUNT(DISTINCT likes.id_likes) DESC
+                        AND likes.`like` = 1 GROUP BY peliculas.id_pelicula ORDER BY COUNT(DISTINCT likes.id_likes) DESC
                         LIMIT 5
                     ) AS top_5 ON peliculas.id_pelicula = top_5.id_pelicula WHERE top_5.id_pelicula IS NULL
                     GROUP BY peliculas.id_pelicula, peliculas.nombre, peliculas.descripcion, peliculas.ano, genero.nombre,

@@ -1,46 +1,43 @@
 <?php
 try {
-    include_once("./conexion/conexion.php");
-    // Verifica que se han recibido los parámetros necesarios
-    if(isset($_GET['peliculaId']) && isset($_GET['usuarioId']) && isset($_GET['accion'])) {
-        // Recoge los valores de los parámetros
+    include_once("../conexion/conexion.php");
+
+    if (isset($_GET['peliculaId']) && isset($_GET['usuarioId'])) {
         $peliculaId = $_GET['peliculaId'];
         $usuarioId = $_GET['usuarioId'];
-        $accion = $_GET['accion'];
-        $ValorLike = 1;
-        $ValorDislike = 0;
+        $valorLike = 1;
 
-        // Verifica si es un like o un dislike
-        if ($accion === "like") {
-            // Inserta en la base de datos según la acción
-            $sqlLike = "INSERT INTO likes (`usuario`, `like/dislike`, `id_pelicula`) VALUES (:usuarioId, :darlike, :peliculaId)";
-            $stmtLike = $conn->prepare($sqlLike);
-            $stmtLike->bindParam(':usuarioId', $usuarioId);
-            $stmtLike->bindParam(':darlike', $ValorLike); // 1 para like
-            $stmtLike->bindParam(':peliculaId', $peliculaId);
-            $stmtLike->execute();
+        // Comprobar si ya hay like
+        $consulta = "SELECT * FROM likes WHERE usuario = :usuarioId AND id_pelicula = :peliculaId";
+        $stmt = $conn->prepare($consulta);
+        $stmt->bindParam(':usuarioId', $usuarioId);
+        $stmt->bindParam(':peliculaId', $peliculaId);
+        $stmt->execute();
 
-            header("Location: index.php");
-            exit();
-            
-        } elseif ($accion === "dislike") {
-            // Inserta en la base de datos según la acción
-            $sqlLike = "INSERT INTO likes (`usuario`, `like/dislike`, `id_pelicula`) VALUES (:usuarioId, :dardislike, :peliculaId)";
-            $stmtLike = $conn->prepare($sqlLike);
-            $stmtLike->bindParam(':usuarioId', $usuarioId);
-            $stmtLike->bindParam(':dardislike', $ValorDislike); // 0 para dislike
-            $stmtLike->bindParam(':peliculaId', $peliculaId);
-            $stmtLike->execute();
+        if ($stmt->rowCount() > 0) {
+            // Ya hay like: eliminarlo
+            $eliminar = "DELETE FROM likes WHERE usuario = :usuarioId AND id_pelicula = :peliculaId";
+            $stmtEliminar = $conn->prepare($eliminar);
+            $stmtEliminar->bindParam(':usuarioId', $usuarioId);
+            $stmtEliminar->bindParam(':peliculaId', $peliculaId);
+            $stmtEliminar->execute();
 
-            header("Location: index.php");
-            exit();
-            
+            echo "Like eliminado.";
+        } else {
+            // No hay like: insertarlo
+            $insertar = "INSERT INTO likes (usuario, `like`, id_pelicula) VALUES (:usuarioId, :valorLike, :peliculaId)";
+            $stmtInsertar = $conn->prepare($insertar);
+            $stmtInsertar->bindParam(':usuarioId', $usuarioId);
+            $stmtInsertar->bindParam(':valorLike', $valorLike);
+            $stmtInsertar->bindParam(':peliculaId', $peliculaId);
+            $stmtInsertar->execute();
+
+            echo "Like agregado.";
         }
     } else {
-        // Manejo de error si no se reciben los parámetros necesarios
-        echo "No has seleccionado la película";
+        echo "Faltan parámetros.";
     }
 } catch (PDOException $e) {
-    echo "Error de conexión: " . $e->getMessage();
+    echo "Error: " . $e->getMessage();
 }
 ?>

@@ -19,6 +19,8 @@ try {
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400&display=swap" rel="stylesheet">
     <script src="../js/buscador.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="./js/index.js"></script>
+
 </head>
 <body>
     <aside class="background--banner">
@@ -30,15 +32,15 @@ try {
                 ON director_pelicula.id_pelicula = peliculas.id_pelicula JOIN directores ON directores.id_director = director_pelicula.id_director
                 JOIN actor_pelicula ON actor_pelicula.id_pelicula = peliculas.id_pelicula JOIN actores
                 ON actores.id_actor = actor_pelicula.id_actor JOIN genero ON genero.id_genero = peliculas.genero JOIN likes
-                ON likes.id_pelicula = peliculas.id_pelicula AND likes.`like/dislike` = 1 GROUP BY peliculas.id_pelicula, peliculas.nombre,
+                ON likes.id_pelicula = peliculas.id_pelicula AND likes.`like` = 1 GROUP BY peliculas.id_pelicula, peliculas.nombre,
                 peliculas.descripcion, peliculas.ano, genero.nombre, peliculas.portada, peliculas.trailer, peliculas.pelicula,
                 directores.nombre_director ORDER BY Likes DESC LIMIT 5;";
             $stmt1 = $conn->prepare($sql);
             $stmt1->execute();
             $peliculas = $stmt1->fetchAll(PDO::FETCH_ASSOC);
         ?>
-        <video id="backgroundVideo" muted autoplay loop poster="../video/sueños de fuga trailer.mp4">
-            <source src="../video/sueños de fuga trailer.mp4" type="video/mp4">
+        <video id="backgroundVideo" muted autoplay loop poster="../video/suenos_de_fuga_trailer.mp4">
+            <source src="../video/suenos_de_fuga_trailer.mp4" type="video/mp4">
             <img id="backgroundImage" src="../img/sueno_de_fuga.jpg" alt="Imagen de fondo">
         </video>
         <div class="banner">
@@ -51,11 +53,11 @@ try {
                         <li><a href="./generos.php">Géneros</a></li>
                         <?php
                         $idUsuario = $_SESSION['id_usuarios'];
-                        $query_admin = "SELECT rol FROM usuarios WHERE id_usuarios = :id_usuario";
-                        $stmt = $conn->prepare($query_admin);
-                        $stmt->bindParam(':id_usuario', $idUsuario);
-                        $stmt->execute();
-                        $usuario = $stmt->fetchColumn();
+                        $sqlUsuario = "SELECT rol FROM usuarios WHERE id_usuarios = :id_usuario";
+                        $stmtUsuario = $conn->prepare($sqlUsuario);
+                        $stmtUsuario->bindParam(':id_usuario', $idUsuario);
+                        $stmtUsuario->execute();
+                        $usuario = $stmtUsuario->fetchColumn();
 
                         if ($usuario === 2) {
                             ?>
@@ -95,26 +97,15 @@ try {
                     </div>
                 </div>
                 <div class="imagotipo--info">
-                    <p>⏵Ver</p>
-                    <br>
+                    <p class="ver-video" onclick="verPelicula(this)">⏵Ver</p>
                     <!-- Like -->
-                    <div class="like-container" pelicula-id="<?php if (isset($pelicula['IdPelicula'])) { echo $pelicula['IdPelicula']; } else {} ?>" usuario-id="<?php echo $_SESSION["id_usuarios"]; ?>" accion="like">
-                        <a href="#" class="like-button" onmouseover="mostrarLikeBlanco(this)" onmouseout="ocultarLikeBlanco(this)" onclick="darLike('like')">
-                            <img src="../img/like.jpg" alt="">
-                        </a>
-                        <a href="#" class="like-blanco-button" style="display: none;">
-                            <img src="../img/like_blanco.jpg" alt="">
-                        </a>
-                    </div>
-
-                    <!-- Dislike -->
-                    <div class="dislike-container" pelicula-id="<?php if (isset($pelicula['IdPelicula'])) { echo $pelicula['IdPelicula']; } else {} ?>" usuario-id="<?php echo $_SESSION["id_usuarios"]; ?>" accion="dislike">
-                        <a href="#" class="dislike-button" onmouseover="mostrarDislikeBlanco(this)" onmouseout="ocultarDislikeBlanco(this)" onclick="darDislike('dislike')">
-                            <img src="../img/dislike.jpg" alt="">
-                        </a>
-                        <a href="#" class="dislike-blanco-button" style="display: none;">
-                            <img src="../img/dislike_blanco.png" alt="">
-                        </a>
+                    <div class="like-container" id="like-container" usuario-id="<?php echo $idUsuario; ?>">
+                        <button class="like-button"
+                                onmouseover="mostrarLikeBlanco(this)"
+                                onmouseout="ocultarLikeBlanco(this)"
+                                onclick="darLike(this)">
+                            <img src="../img/like.jpg" alt="like">
+                        </button>
                     </div>
                 </div>
             </div>
@@ -154,7 +145,7 @@ try {
                         JOIN genero ON genero.id_genero = peliculas.genero
                         LEFT JOIN (
                             SELECT peliculas.id_pelicula FROM peliculas JOIN likes ON likes.id_pelicula = peliculas.id_pelicula
-                            AND likes.`like/dislike` = 1 GROUP BY peliculas.id_pelicula ORDER BY COUNT(DISTINCT likes.id_likes) DESC
+                            AND likes.`like` = 1 GROUP BY peliculas.id_pelicula ORDER BY COUNT(DISTINCT likes.id_likes) DESC
                             LIMIT 5
                         ) AS top_5 ON peliculas.id_pelicula = top_5.id_pelicula WHERE top_5.id_pelicula IS NULL
                         GROUP BY peliculas.id_pelicula, peliculas.nombre, peliculas.descripcion, peliculas.ano, genero.nombre,
@@ -210,7 +201,6 @@ try {
             <p class="contruccion"></p>
         </div>
     </footer>
-    <script src="./js/index.js"></script>
 </body>
 </html>
 
